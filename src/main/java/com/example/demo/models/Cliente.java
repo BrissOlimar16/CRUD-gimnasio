@@ -1,6 +1,9 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Clientes")
@@ -10,12 +13,17 @@ public class Cliente {
     @Column(name = "id_cliente")
     private Integer idCliente;
 
+    @NotBlank(message = "Ingresa el nombre del cliente!")
     @Column(name = "nombreC", length = 100)
     private String nombre;
 
+    @NotBlank(message = "Ingresa el correo electrónico del cliente!")
+    @Email(message = "La dirección de correo no es correcta!")
     @Column(unique = true, length = 100)
     private String correo;
 
+    @NotBlank(message = "Ingresa el número de teléfono del cliente")
+    @Pattern(regexp = "^\\d{10}$", message = "El número telefonico debe ser de 10 dígitos")
     @Column(length = 20)
     private String telefono;
 

@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Membresia;
 import com.example.demo.services.MembresiaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/membresias")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ControladorMembresia {
     @Autowired
     private MembresiaService membresiaService;
@@ -29,12 +30,14 @@ public class ControladorMembresia {
         return new ResponseEntity<>(membresia, HttpStatus.OK);
     }
 
+    @Valid
     @PostMapping
     public ResponseEntity<Membresia> guardar(@RequestBody Membresia membresia){
         Membresia nuevaMembresia = membresiaService.guardar(membresia);
         return new ResponseEntity<>(nuevaMembresia, HttpStatus.CREATED);
     }
 
+    @Valid
     @PutMapping("/{id}")
     public ResponseEntity<Membresia> actualizar(@PathVariable Integer id, @RequestBody Membresia membresia){
         Membresia membresiaActualizada = membresiaService.actualizar(id, membresia);

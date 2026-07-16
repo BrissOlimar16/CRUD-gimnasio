@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "membresias")
@@ -11,9 +12,11 @@ public class Membresia {
     @Column(name = "id_membresias")
     private int idMembresia;
 
+    @NotBlank(message = "Ingrese el tipo de membresia")
     @Column(name = "nombreM", nullable = false, unique = true)
     private String nombreMembresia;
 
+    @NotBlank(message = "Ingrese el precio de membresia")
     @Column(nullable = false)
     private BigDecimal precio;
 
