@@ -22,12 +22,23 @@ public class MembresiaServiceLo implements MembresiaService{
     }
 
     @Override
-    public Membresia obtenerId(Long id){
+    public Membresia obtenerId(Integer id){
         return membresiaRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void eliminar(Long id){
+    public Membresia actualizar(Integer id, Membresia membresiaActualizada){
+        Membresia membresiaExistetente = membresiaRepository.findById(id).orElse(null);
+        if(membresiaExistetente == null){
+            throw new RuntimeException("Membresia no encontrada");
+        }
+        membresiaExistetente.setNombreMembresia(membresiaActualizada.getNombreMembresia());
+        membresiaExistetente.setPrecio(membresiaActualizada.getPrecio());
+        return membresiaRepository.save(membresiaExistetente);
+    }
+
+    @Override
+    public void eliminar(Integer id){
         membresiaRepository.deleteById(id);
     }
 }

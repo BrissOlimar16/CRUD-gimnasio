@@ -22,12 +22,25 @@ public class ClienteServiceLo implements ClienteService{
     }
 
     @Override
-    public Cliente obtenerId (Long id){
+    public Cliente obtenerId (Integer id){
         return clienteRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void eliminar(Long id){
+    public Cliente actualizar(Integer id, Cliente clienteActualizado){
+        Cliente clienteExistente = clienteRepository.findById(id).orElse(null);
+        if(clienteExistente == null){
+            throw new RuntimeException("Cliente no encontrado");
+        }
+        clienteExistente.setNombre(clienteActualizado.getNombre());
+        clienteExistente.setCorreo(clienteActualizado.getCorreo());
+        clienteExistente.setTelefono(clienteActualizado.getTelefono());
+        clienteExistente.setMembresia(clienteActualizado.getMembresia());
+        return clienteRepository.save(clienteExistente);
+    }
+
+    @Override
+    public void eliminar(Integer id){
         clienteRepository.deleteById(id);
     }
 }

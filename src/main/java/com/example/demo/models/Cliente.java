@@ -8,9 +8,9 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
-    private Long idCliente;
+    private Integer idCliente;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "nombreC", length = 100)
     private String nombre;
 
     @Column(unique = true, length = 100)
@@ -20,13 +20,13 @@ public class Cliente {
     private String telefono;
 
     @ManyToOne
-    @JoinColumn(name = "id_membresias", referencedColumnName = "id_membresias")
+    @JoinColumn(name = "id_membresia", referencedColumnName = "id_membresias")
     private Membresia membresia;
 
     public Cliente() {
     }
 
-    public Cliente(Long idCliente, String nombre, String correo, String telefono, Membresia membresia) {
+    public Cliente(Integer idCliente, String nombre, String correo, String telefono, Membresia membresia) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.correo = correo;
@@ -35,11 +35,11 @@ public class Cliente {
     }
 
 
-    public Long getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Long idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 

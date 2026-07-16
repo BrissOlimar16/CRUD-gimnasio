@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Cliente;
 import com.example.demo.services.ClienteService;
-import com.sun.net.httpserver.HttpsServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ public class ControladorCliente {
     }
 
     @GetMapping ("/{id}")
-    public ResponseEntity<Cliente> obtenerId(@PathVariable Long id){
+    public ResponseEntity<Cliente> obtenerId(@PathVariable Integer id){
         Cliente cliente = clienteService.obtenerId(id);
         if(cliente == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -36,8 +35,14 @@ public class ControladorCliente {
         return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Cliente> eliminar(@PathVariable Long id){
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Integer id, @RequestBody Cliente cliente){
+        Cliente clienteActualizado = clienteService.actualizar(id, cliente);
+        return ResponseEntity.ok(clienteActualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Cliente> eliminar(@PathVariable Integer id){
         Cliente cliente = clienteService.obtenerId(id);
         if(cliente == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -9,7 +9,7 @@ public class Membresia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_membresias")
-    private Long idMembresia;
+    private int idMembresia;
 
     @Column(name = "nombreM", nullable = false, unique = true)
     private String nombreMembresia;
@@ -20,17 +20,17 @@ public class Membresia {
     public Membresia() {
     }
 
-    public Membresia(Long idMembresias, String nombreMembresia, BigDecimal precio) {
+    public Membresia(int idMembresias, String nombreMembresia, BigDecimal precio) {
         this.idMembresia = idMembresias;
         this.nombreMembresia = nombreMembresia;
         this.precio = precio;
     }
 
-    public Long getIdMembresia() {
+    public Integer getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(Integer idMembresia) {
         this.idMembresia = idMembresia;
     }
 

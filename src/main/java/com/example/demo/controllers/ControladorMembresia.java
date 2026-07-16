@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Membresia;
 import com.example.demo.services.MembresiaService;
-import com.sun.net.httpserver.HttpsServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ public class ControladorMembresia {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Membresia> obtenerId(@PathVariable Long id){
+    public ResponseEntity<Membresia> obtenerId(@PathVariable Integer id){
         Membresia membresia = membresiaService.obtenerId(id);
         if(membresia == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -36,8 +35,14 @@ public class ControladorMembresia {
         return new ResponseEntity<>(nuevaMembresia, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Membresia> actualizar(@PathVariable Integer id, @RequestBody Membresia membresia){
+        Membresia membresiaActualizada = membresiaService.actualizar(id, membresia);
+        return ResponseEntity.ok(membresiaActualizada);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id){
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id){
         Membresia membresia = membresiaService.obtenerId(id);
         if(membresia == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
