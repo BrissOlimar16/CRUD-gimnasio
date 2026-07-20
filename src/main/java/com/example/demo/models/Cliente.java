@@ -14,6 +14,8 @@ public class Cliente {
     private Integer idCliente;
 
     @NotBlank(message = "Ingresa el nombre del cliente!")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$",
+            message = "El nombre solo debe contener letras y espacios")
     @Column(name = "nombreC", length = 100)
     private String nombre;
 
@@ -23,7 +25,7 @@ public class Cliente {
     private String correo;
 
     @NotBlank(message = "Ingresa el número de teléfono del cliente")
-    @Pattern(regexp = "^\\d{10}$", message = "El número telefonico debe ser de 10 dígitos")
+    @Pattern(regexp = "^[0-9]{10}$", message = "El número telefonico debe ser de 10 dígitos")
     @Column(length = 20)
     private String telefono;
 
